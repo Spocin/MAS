@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.List;
 
-public class Language {
+public class Language implements Serializable {
 
     public static List<String> acceptedLanguageCodes = List.of("POL","GER","ENG");
 
