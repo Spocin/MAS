@@ -9,4 +9,9 @@ public class Patient extends Person {
     public Patient(String firstName, String lastName, String pesel, String email, Address address) {
         super(firstName, lastName, pesel, email, address);
     }
+
+    @Override
+    public String toString() {
+        return "Patient " + super.toString();
+    }
 }
