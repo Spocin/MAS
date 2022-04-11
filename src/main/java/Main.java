@@ -118,9 +118,9 @@ public class Main {
 
             case "P" -> {
                 if (secondsName.equals("E")) {
-                    person = new Person(firstName,lastName,pesel,email,address);
+                    person = new Patient(firstName,lastName,pesel,email,address);
                 } else {
-                    person = new Person(firstName,secondsName,lastName,pesel,email,address);
+                    person = new Patient(firstName,secondsName,lastName,pesel,email,address);
                 }
             }
 
