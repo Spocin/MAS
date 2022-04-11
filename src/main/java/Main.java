@@ -36,12 +36,7 @@ public class Main {
             }
 
             case 3 -> {
-                Account.accounts.forEach(account -> {
-                    System.out.println("= " + account.toString());
-                });
-                System.out.println();
-                System.out.println(" Press any to continue...");
-                new Scanner(System.in).next();
+                displayAllAccounts();
             }
 
             case 0 -> {
@@ -144,6 +139,21 @@ public class Main {
 
         System.out.println("= Success!");
         System.out.println();
+    }
+
+    private static void displayAllAccounts() {
+        if (Account.accounts.isEmpty()) {
+            System.out.println("=====================================");
+            System.out.println("        No account to display        ");
+        } else {
+            Account.accounts.forEach(account -> {
+                System.out.println("= " + account.toString());
+            });
+        }
+
+        System.out.println();
+        System.out.print(" Enter anything to continue... ");
+        new Scanner(System.in).next();
     }
 }
 
