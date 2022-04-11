@@ -7,10 +7,18 @@ public class Account implements Serializable {
     public static ArrayList<Account> accounts = new ArrayList<>();
     private final LocalDateTime creationTime;
 
-    private Person person;
+    private final Person person;
 
     public Account (Person person) {
         this.creationTime = LocalDateTime.now();
         this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "creationTime=" + creationTime +
+                ", person=" + person +
+                '}';
     }
 }

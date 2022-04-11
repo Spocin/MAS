@@ -32,4 +32,17 @@ public class Person implements Serializable {
     public void addLanguage(int languageNumber) {
         this.languages.add(new Language(Language.acceptedLanguageCodes.get(languageNumber)));
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", pesel='" + pesel + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", languages=" + languages +
+                '}';
+    }
 }
