@@ -12,25 +12,24 @@ public class Person implements Serializable {
     private Address address;
     private List<Language> languages = new ArrayList<>();
 
-    public Person (String firstName, String secondName, String lastName, String pesel, String email) {
+    public Person (String firstName, String secondName, String lastName, String pesel, String email, Address address) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.lastName = lastName;
         this.pesel = pesel;
         this.email = email;
-        this.address = obtainAndAddAddress();
+        this.address = address;
     }
 
-    public Person (String firstName, String lastName, String pesel, String email) {
+    public Person (String firstName, String lastName, String pesel, String email, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
         this.email = email;
-        this.address = obtainAndAddAddress();
+        this.address = address;
     }
 
-    private Address obtainAndAddAddress () {
-
-        return null;
+    public void addLanguage(int languageNumber) {
+        this.languages.add(new Language(Language.acceptedLanguageCodes.get(languageNumber)));
     }
 }
