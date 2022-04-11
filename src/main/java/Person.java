@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Person {
 
     private String firstName;
@@ -5,6 +7,7 @@ public class Person {
     private String lastName;
     private String pesel;
     private String email;
+    private ArrayList<Language> languages = new ArrayList<>();
 
     private Patient patient;
     private Doctor doctor;
