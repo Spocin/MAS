@@ -1,7 +1,13 @@
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        if (fileExists("Accounts.txt")) {
+            loadAccounts();
+        }
+
         int menuFlag = 1;
         Scanner sc = new Scanner(System.in);
 
@@ -26,10 +32,10 @@ public class Main {
         return sb.toString();
     }
 
-    private static void menuLogic (int menuFlag) {
+    private static void menuLogic (int menuFlag) throws IOException {
         switch (menuFlag) {
             case 1 -> {
-
+                saveAccounts();
             }
             case 2 -> {
                 createNewAccount();
@@ -154,6 +160,27 @@ public class Main {
         System.out.println();
         System.out.print(" Enter anything to continue... ");
         new Scanner(System.in).next();
+    }
+
+    private static void saveAccounts() throws IOException {
+        FileOutputStream fos = new FileOutputStream("Accounts.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(Account.accounts);
+        oos.flush();
+        oos.close();
+        System.out.println("Account saved");
+    }
+
+    private static void loadAccounts () throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("Accounts.txt");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Account.accounts = (ArrayList<Account>) ois.readObject();
+        ois.close();
+        System.out.println("Account loaded");
+    }
+
+    private static boolean fileExists (String path) {
+        return new File(path).exists();
     }
 }
 
