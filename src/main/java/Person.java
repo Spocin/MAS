@@ -43,7 +43,10 @@ public class Person implements Serializable {
 
     /*METHODS*/
     public void addLanguage(int languageNumber) {
-        this.languages.add(new Language(Language.acceptedLanguageCodes.get(languageNumber)));
+        Language language = new Language(Language.acceptedLanguageCodes.get(languageNumber));
+        language.addPerson(this);
+
+        this.languages.add(language);
     }
 
     @Override
