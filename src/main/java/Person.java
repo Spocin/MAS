@@ -9,7 +9,9 @@ public class Person implements Serializable {
     private String pesel;
     private String email;
 
+    private Account account;
     private Address address;
+
     private List<Language> languages = new ArrayList<>();
 
     public Person (String firstName, String secondName, String lastName, String pesel, String email, Address address) {
@@ -29,6 +31,17 @@ public class Person implements Serializable {
         this.address = address;
     }
 
+    /*GETTERS*/
+    public Account getAccount() {
+        return account;
+    }
+
+    /*SETTERS*/
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    /*METHODS*/
     public void addLanguage(int languageNumber) {
         this.languages.add(new Language(Language.acceptedLanguageCodes.get(languageNumber)));
     }

@@ -20,34 +20,23 @@ public class Main {
     }
 
     private static String generateMainMenu() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("=====================================\n");
-        sb.append("       Welcome to the clinic         \n");
-        sb.append("=====================================\n");
-        sb.append(" 1. Save Changes to file             \n");
-        sb.append(" 2. Create new Account               \n");
-        sb.append(" 3. Display all accounts             \n");
-        sb.append(" 0. Exit                             \n");
-
-        return sb.toString();
+        return """
+                =====================================
+                       Welcome to the clinic        \s
+                =====================================
+                 1. Save Changes to file            \s
+                 2. Create new Account              \s
+                 3. Display all accounts            \s
+                 0. Exit                            \s
+                """;
     }
 
     private static void menuLogic (int menuFlag) throws IOException {
         switch (menuFlag) {
-            case 1 -> {
-                saveAccounts();
-            }
-            case 2 -> {
-                createNewAccount();
-            }
-
-            case 3 -> {
-                displayAllAccounts();
-            }
-
-            case 0 -> {
-                System.out.println("= Exiting... ");
-            }
+            case 1 -> saveAccounts();
+            case 2 -> createNewAccount();
+            case 3 -> displayAllAccounts();
+            case 0 -> System.out.println("= Exiting... ");
         }
     }
 
@@ -141,7 +130,9 @@ public class Main {
         System.out.print("= Choose your main language: ");
         person.addLanguage(sc.nextInt());
 
-        Account.accounts.add(new Account(person));
+        Account newAccount = new Account(person);
+        person.setAccount(newAccount);
+        Account.accounts.add(newAccount);
 
         System.out.println("= Success!");
         System.out.println();
@@ -152,9 +143,7 @@ public class Main {
             System.out.println("=====================================");
             System.out.println("        No account to display        ");
         } else {
-            Account.accounts.forEach(account -> {
-                System.out.println("= " + account.toString());
-            });
+            Account.accounts.forEach(account -> System.out.println("= " + account.toString()));
         }
 
         System.out.println();
