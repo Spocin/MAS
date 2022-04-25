@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Doctor extends Person {
+    private List<Appointment> appointments = new ArrayList<>();
 
     public static boolean canDisplayAllPatientsInfo = true;
 
@@ -8,6 +12,10 @@ public class Doctor extends Person {
 
     public Doctor (String firstName, String lastName, String pesel, String email, Address address) {
         super(firstName, lastName, pesel, email, address);
+    }
+
+    public void addAppointment (Appointment appointment) {
+        this.appointments.add(appointment);
     }
 
     @Override
