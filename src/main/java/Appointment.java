@@ -1,3 +1,5 @@
+import Enums.AppointmentStatus;
+
 import java.time.LocalDateTime;
 
 public class Appointment {

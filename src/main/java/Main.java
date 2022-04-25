@@ -94,6 +94,7 @@ public class Main {
         System.out.println("= Do you want to create account for Doctor (D) or Patient (P)?");
         System.out.print("= ");
 
+        //TODO change this to Doctor or Patient
         Person person;
 
         switch (sc.next()) {
