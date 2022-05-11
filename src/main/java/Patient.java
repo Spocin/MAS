@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Patient extends Person {
+public class Patient extends Person implements Serializable {
     private List<Appointment> appointments = new ArrayList<>();
 
     public static boolean canDisplayAllPatientsInfo = false;

@@ -1,11 +1,12 @@
 import Enums.CredentialsEnum;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Doctor extends Person {
+public class Doctor extends Person implements Serializable {
     private List<Appointment> appointments = new ArrayList<>();
     private Map<CredentialsEnum,Title> doctorTitles = new HashMap<>();
 
