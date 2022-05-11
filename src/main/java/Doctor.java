@@ -41,6 +41,16 @@ public class Doctor extends Person {
     }
 
     @Override
+    public String getFullInformation() {
+        return "FirstName: " + super.getFirstName() + "\n" +
+                "SecondName: " + super.getSecondName() + "\n" +
+                "LastName: " + super.getSecondName() + "\n" +
+                "Pesel: " + super.getPesel() + "\n" +
+                "Email: " + super.getEmail() + "\n" +
+                doctorTitles.values();
+    }
+
+    @Override
     public String toString() {
         return "Doctor " + super.toString();
     }

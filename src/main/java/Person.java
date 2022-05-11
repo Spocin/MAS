@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public abstract class Person implements Serializable {
     private String firstName;
     private String secondName = null;
     private String lastName;
@@ -36,12 +36,38 @@ public class Person implements Serializable {
         return account;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
     /*SETTERS*/
     public void setAccount(Account account) {
         this.account = account;
     }
 
     /*METHODS*/
+    public abstract String getFullInformation();
+
     public void addLanguage(int languageNumber) {
         Language language = new Language(Language.acceptedLanguageCodes.get(languageNumber));
         language.addPerson(this);

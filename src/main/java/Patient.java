@@ -19,6 +19,16 @@ public class Patient extends Person {
     }
 
     @Override
+    public String getFullInformation() {
+        return "FirstName: " + super.getFirstName() + "\n" +
+                "SecondName: " + super.getSecondName() + "\n" +
+                "LastName: " + super.getSecondName() + "\n" +
+                "Pesel: " + super.getPesel() + "\n" +
+                "Email: " + super.getEmail() + "\n" +
+                appointments;
+    }
+
+    @Override
     public String toString() {
         return "Patient " + super.toString();
     }

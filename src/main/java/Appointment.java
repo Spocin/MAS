@@ -42,4 +42,16 @@ public class Appointment {
         this.modifiedAt = LocalDateTime.now();
         this.patient = patient;
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", status=" + status +
+                ", appointmentDateTime=" + appointmentDateTime +
+                ", description='" + description + '\'' +
+                ", roomNumber=" + roomNumber +
+                '}';
+    }
 }

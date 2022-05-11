@@ -20,6 +20,14 @@ public class Title {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
+
+    @Override
+    public String toString() {
+        return "Title{" +
+                "credential=" + credential +
+                ", acquiredAt=" + acquiredAt +
+                '}';
+    }
 }
 
 
