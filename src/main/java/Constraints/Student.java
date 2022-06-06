@@ -3,12 +3,13 @@ package Constraints;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Student {
+public class Student implements Comparable<Student> {
     public final static float maxStudentsTuitionBeforeRiotsStart = 1500;
     public static Map<String,Student> studentsMap = new HashMap<>();
 
     private float tuition;
     private String eska;
+    private float studiesGPA;
 
     public Student (float tuition, String eska) throws Exception {
         setTuition(tuition);
@@ -38,5 +39,10 @@ public class Student {
         }
 
         this.eska = eska;
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return Float.compare(this.studiesGPA, o.studiesGPA);
     }
 }
