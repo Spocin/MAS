@@ -1,12 +1,19 @@
 package Constraints;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Student {
     public final static float maxStudentsTuitionBeforeRiotsStart = 1500;
+    public static Map<String,Student> studentsMap = new HashMap<>();
 
     private float tuition;
+    private String eska;
 
-    public Student (float tuition) throws Exception {
+    public Student (float tuition, String eska) throws Exception {
         setTuition(tuition);
+        setEska(eska);
+        studentsMap.put(this.eska,this);
     }
 
     public void setTuition (float tuition) throws Exception {
@@ -19,5 +26,17 @@ public class Student {
         }
 
         this.tuition = tuition;
+    }
+
+    public void setEska (String eska) throws Exception {
+        if (!eska.startsWith("s")) {
+            throw new Exception("Eska must start with letter s");
+        }
+
+        if (studentsMap.containsKey(eska)) {
+            throw new Exception("Such ESKA already exists but must be unique");
+        }
+
+        this.eska = eska;
     }
 }
