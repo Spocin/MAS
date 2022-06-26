@@ -37,6 +37,7 @@ export default abstract class Pracownik {
   }
 
   private wyliczStazPracy (): Duration {
+    //TODO check if works fine
     let stazPracy = moment.duration(0);
     this.daneZatrudnienia
       .forEach(zatrudnienie => {

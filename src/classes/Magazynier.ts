@@ -12,6 +12,7 @@ export default class Magazynier extends Pracownik{
   }
 
   public pobierzStanMagazynu (): Szpula[] {
+    //TODO implement this
     throw new Error("Method not implemented");
   }
 }
