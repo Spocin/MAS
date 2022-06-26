@@ -6,7 +6,8 @@
   "description": "Semestral project made for subject MAS on 6th semester",
   "scripts": {
     "ng": "ng",
-    "start": "electron-forge start",
+    "startDev": "ng build --base-href ./ && electron .",
+    "startPackaged": "electron-forge start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "testAngular": "ng test",
@@ -27,6 +28,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^8.0.2",
     "moment": "^2.29.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
