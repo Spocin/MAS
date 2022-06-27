@@ -1,26 +1,39 @@
-import Kabel from "@classes/Kabel";
+import {Expose} from "class-transformer";
 
 export default class Szpula {
-  public static mapaSzpul: Map<string,Szpula> = new Map<string,Szpula>();
+  public static ekstensja: Map<string,Szpula> = new Map<string, Szpula>();
 
-  private identyfikator: string;
-  private _maNawiniety: Kabel | undefined;
+  @Expose()
+  private readonly _id: string;
 
-  constructor(identyfikator: string, ) {
-    if (Szpula.mapaSzpul.has(identyfikator)) {
-      throw new Error(`Szpula o identyfikatorze ${identyfikator} juz istnieje`);
+  @Expose()
+  private _kabelFK: number | undefined;
+
+  constructor(id: string, kabelFK?: number) {
+    if (Szpula.ekstensja.has(id)) {
+      throw new Error(`Szpula o identyfikatorze ${id} już istnieje`);
     }
 
-    this.identyfikator = identyfikator;
-    this.save();
+    this._id = id;
+    this._kabelFK = kabelFK;
   }
 
-  set maNawiniety(value: Kabel | undefined) {
-    this._maNawiniety = value;
-    this.save();
+  public static dodajDoEkstensji(szpula: Szpula) {
+    Szpula.ekstensja.set(szpula.id,szpula);
   }
 
-  private save() {
-    Szpula.mapaSzpul.set(this.identyfikator, this);
+  /*  GET  */
+  get id(): string {
+    return this._id;
+  }
+
+  get kabelFK(): number | undefined {
+    return this._kabelFK;
+  }
+
+  /*  SET  */
+  set kabelFK(value: number | undefined) {
+    this._kabelFK = value;
+    Szpula.dodajDoEkstensji(this);
   }
 }
