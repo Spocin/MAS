@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
-import {ElectronService} from "../services/Electron.service";
+import {Component, OnInit} from '@angular/core';
+import {Ekstensje, StorageService} from "../services/Storage.service";
 import Szpula from "@classes/Szpula";
+import Kabel from "@classes/Kabel";
+import Serializable from "@classes/Serializable";
+import {classToPlain, instanceToPlain, plainToInstance} from "class-transformer";
 
 @Component({
   selector: 'app-root',
@@ -9,27 +12,34 @@ import Szpula from "@classes/Szpula";
 })
 export class AppComponent {
   title = 'MAS';
-  electronService: ElectronService;
+  storageService: StorageService;
 
-  data = "empty";
-
-  constructor(electronService: ElectronService) {
-    this.electronService = electronService;
+  constructor(storageService: StorageService) {
+    this.storageService = storageService;
   }
 
   save() {
-    const szpula1 = new Szpula("S-123");
-    const szpula2 = new Szpula("S-124");
-    const szpula3 = new Szpula("S-125");
+    const test1 = new Szpula("1","10");
+    const test2 = new Szpula("2","12");
+    const test3 = new Szpula("3","13");
+    const test4 = new Szpula("4","14");
 
-    this.electronService.save("szpule",Szpula.mapaSzpul);
+
+    const parsed = instanceToPlain(test1);
+    const stringified = JSON.stringify(parsed);
+    this.storageService.save("SZPULA",stringified);
   }
 
   load() {
-    this.data = this.electronService.load("szpule");
-  }
-
-  getPath() {
-    this.data = this.electronService.storePath;
+    const plain = this.storageService.load("SZPULA");
+    console.log(plain);
+    const stingified = this.storageService.load("SZPULA") as Object;
+    console.log(stingified);
+    if (typeof plain === "string") {
+      const parsed = JSON.parse(plain);
+      console.log(parsed);
+      const object = plainToInstance(Szpula, parsed);
+      console.log(object);
+    }
   }
 }
