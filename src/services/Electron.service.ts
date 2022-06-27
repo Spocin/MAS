@@ -9,7 +9,7 @@ import IStorage from "./Electron.service.interface";
 })
 export class ElectronService {
   electronStore!: ElectronStore;
-  storePath!: string;
+  _storePath!: string;
 
   storageConfig!: IStorage;
 
@@ -22,20 +22,23 @@ export class ElectronService {
       const Store = window.require('electron-store');
       //TODO use config of storage
       this.electronStore = new Store();
-      this.storePath = this.electronStore.path;
+      this._storePath = this.electronStore.path;
     }
   }
 
-  save (input: string) {
+  save (key: string, value: unknown) {
     //TODO implement saving all
-    this.electronStore.set("q1",input);
-    console.log(`Saved ${input} to q1`);
+    this.electronStore.set(key,JSON.stringify(value));
   }
 
-  load (): any {
+  load (key: string): any {
     //TODO implement loading all
-    const result = this.electronStore.get("q1");
-    console.log(`Got ${result} from q1`);
-    return result;
+    const data = JSON.parse(<string>this.electronStore.get(key));
+    console.log(data);
+    return data;
+  }
+
+  get storePath(): string {
+    return this._storePath;
   }
 }

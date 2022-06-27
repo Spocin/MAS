@@ -10,8 +10,8 @@ export default class Kabel {
   private przeznaczenie: string;
   private certyfikaty: string[];
 
-  private zamowinia_kabel: Zamowienie_kabel[] | undefined;
-  private szpula: Szpula;
+  private _zamowienia_kable: Zamowienie_kabel[] = [];
+  private nawinietyJestNa: Szpula;
   private wyprodukowanyPrzez: LiniaProdukcyjna;
 
   constructor(oznaczenie: string,
@@ -19,21 +19,30 @@ export default class Kabel {
               przeznaczenie: string,
               certyfikaty: string[],
               szpula: Szpula,
-              wyprodukowanyPrzez: LiniaProdukcyjna,
-              zamowienia_kabel?: Zamowienie_kabel[]) {
+              wyprodukowanyPrzez: LiniaProdukcyjna) {
 
     if (Kabel.mapaKabli.has(oznaczenie)) {
-      throw new Error("Kabel o takim oznaczeniu już istnieje");
+      throw new Error(`Kabel o oznaczeniu ${oznaczenie} już istnieje`);
     }
 
     this.oznaczenie = oznaczenie;
     this.opis = opis;
     this.przeznaczenie = przeznaczenie;
     this.certyfikaty = certyfikaty;
-    this.szpula = szpula;
+    this.nawinietyJestNa = szpula;
     this.wyprodukowanyPrzez = wyprodukowanyPrzez;
-    this.zamowinia_kabel = zamowienia_kabel;
 
+    this.nawinietyJestNa.maNawiniety = this;
+
+    this.save()
+  }
+
+  addZamowienie_Kabel(zamowienieKabel: Zamowienie_kabel) {
+    this._zamowienia_kable.push(zamowienieKabel);
+    this.save()
+  }
+
+  private save() {
     Kabel.mapaKabli.set(this.oznaczenie,this);
   }
 }

@@ -4,16 +4,23 @@ export default class Szpula {
   public static mapaSzpul: Map<string,Szpula> = new Map<string,Szpula>();
 
   private identyfikator: string;
-  private kabel: Kabel | undefined;
+  private _maNawiniety: Kabel | undefined;
 
-  constructor(identyfikator: string, kabel?: Kabel) {
+  constructor(identyfikator: string, ) {
     if (Szpula.mapaSzpul.has(identyfikator)) {
-      throw new Error("Szpula o takim identyfikatorze juz istnieje");
+      throw new Error(`Szpula o identyfikatorze ${identyfikator} juz istnieje`);
     }
 
     this.identyfikator = identyfikator;
-    this.kabel = kabel;
+    this.save();
+  }
 
+  set maNawiniety(value: Kabel | undefined) {
+    this._maNawiniety = value;
+    this.save();
+  }
+
+  private save() {
     Szpula.mapaSzpul.set(this.identyfikator, this);
   }
 }
