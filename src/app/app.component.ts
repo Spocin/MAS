@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {StorageService} from "../services/Storage.service";
 import Szpula from "@classes/Szpula";
+import Login from "@classes/Login";
 
 @Component({
   selector: 'app-root',
@@ -20,22 +21,36 @@ export class AppComponent {
     const test2 = new Szpula("11",10);
     const test3 = new Szpula("12");
 
-    Szpula.dodajDoEkstensji(test1);
-    Szpula.dodajDoEkstensji(test2);
-    Szpula.dodajDoEkstensji(test3);
+    Szpula.dodajDoEkstensji = test1;
+    Szpula.dodajDoEkstensji = test2;
+    Szpula.dodajDoEkstensji = test3;
+
+    const login1 = new Login("Spocin","zaq1@WSX");
+    const login2 = new Login("Spocin2","zaq1@WSX");
+    const login3 = new Login("Spocin3","zaq1@WSX");
+    const login4 = new Login("Spocin4","zaq1@WSX");
+
+    Login.dodajDoEkstensji = login1;
+    Login.dodajDoEkstensji = login2;
+    Login.dodajDoEkstensji = login3;
+    Login.dodajDoEkstensji = login4;
   }
 
   save() {
-    this.storageService.zapiszEkstensje();
+    this.storageService.zapiszWszystkieEkstensje();
   }
 
   load() {
-    this.storageService.wczytajEkstensje();
+    this.storageService.wczytajWszystkieEkstensje();
   }
 
   check() {
-    console.log(
-      Szpula.ekstensja.values()
-    )
+    console.log(Szpula.ekstensja.values());
+    console.log(Login.ekstensja.values());
+  }
+
+  clear() {
+    Szpula.ekstensja.clear();
+    Login.ekstensja.clear();
   }
 }

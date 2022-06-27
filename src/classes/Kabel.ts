@@ -1,38 +1,49 @@
 import Szpula from "@classes/Szpula";
 import Zamowienie_kabel from "@classes/Zamowienie_kabel";
 import LiniaProdukcyjna from "@classes/LiniaProdukcyjna";
+import {Expose, Type} from "class-transformer";
 
 export default class Kabel {
   public static mapaKabli: Map<string,Kabel> = new Map<string, Kabel>();
 
-  private oznaczenie: string;
+  @Expose()
+  private readonly _id: string;
+
+  @Expose()
   private opis: string;
+
+  @Expose()
   private przeznaczenie: string;
+
+  @Expose()
   private certyfikaty: string[];
 
+  @Type(() => Zamowienie_kabel)
   private _zamowienia_kable: Zamowienie_kabel[] = [];
-  private nawinietyJestNa: Szpula;
-  private wyprodukowanyPrzez: LiniaProdukcyjna;
 
-  constructor(oznaczenie: string,
+  @Type(() => Szpula)
+  private szpula: Szpula;
+
+  /*@Type(() => LiniaProdukcyjna)
+  private wyprodukowanyPrzez: LiniaProdukcyjna;*/
+
+  constructor(id: string,
               opis: string,
               przeznaczenie: string,
               certyfikaty: string[],
               szpula: Szpula,
-              wyprodukowanyPrzez: LiniaProdukcyjna) {
+              /*wyprodukowanyPrzez: LiniaProdukcyjna*/) {
 
-    if (Kabel.mapaKabli.has(oznaczenie)) {
-      throw new Error(`Kabel o oznaczeniu ${oznaczenie} już istnieje`);
+    if (Kabel.mapaKabli.has(id)) {
+      throw new Error(`Kabel o oznaczeniu ${id} już istnieje`);
     }
 
-    this.oznaczenie = oznaczenie;
+    this._id = id;
     this.opis = opis;
     this.przeznaczenie = przeznaczenie;
     this.certyfikaty = certyfikaty;
-    this.nawinietyJestNa = szpula;
-    this.wyprodukowanyPrzez = wyprodukowanyPrzez;
-
-    this.nawinietyJestNa.maNawiniety = this;
+    this.szpula = szpula;
+    /*this.wyprodukowanyPrzez = wyprodukowanyPrzez;*/
 
     this.save()
   }
@@ -43,6 +54,11 @@ export default class Kabel {
   }
 
   private save() {
-    Kabel.mapaKabli.set(this.oznaczenie,this);
+    /*this.szpula.kabelFK = this;*/
+  }
+
+
+  get id(): string {
+    return this._id;
   }
 }

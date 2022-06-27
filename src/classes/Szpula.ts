@@ -18,8 +18,8 @@ export default class Szpula {
     this._kabelFK = kabelFK;
   }
 
-  public static dodajDoEkstensji(szpula: Szpula) {
-    Szpula.ekstensja.set(szpula.id,szpula);
+  static set dodajDoEkstensji (szpula: Szpula) {
+    this.ekstensja.set(szpula.id,szpula);
   }
 
   /*  GET  */
@@ -27,13 +27,13 @@ export default class Szpula {
     return this._id;
   }
 
-  get kabelFK(): number | undefined {
-    return this._kabelFK;
-  }
-
   /*  SET  */
   set kabelFK(value: number | undefined) {
     this._kabelFK = value;
-    Szpula.dodajDoEkstensji(this);
+    Szpula.dodajDoEkstensji = this;
+  }
+
+  get kabelFK(): number | undefined {
+    return this._kabelFK;
   }
 }

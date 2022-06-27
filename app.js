@@ -22,7 +22,9 @@ function createWindow() {
     })
   );
 
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools({
+    mode: "detach"
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;

@@ -3,14 +3,13 @@ import * as ElectronStore from "electron-store";
 import * as electron from "electron";
 import {Injectable} from "@angular/core";
 import Szpula from "@classes/Szpula";
-import {
-  instanceToPlain,
-  plainToInstance
-} from "class-transformer";
+import {instanceToPlain, plainToInstance} from "class-transformer";
+import Login from "@classes/Login";
 
 export enum Ekstensje {
   "SZPULE" = "SZPULE",
-  "KABLE" = "KABLE"
+  "KABLE" = "KABLE",
+  "LOGINY" = "LOGINY"
 }
 
 @Injectable({
@@ -30,33 +29,51 @@ export class StorageService {
     }
   }
 
-  public zapiszEkstensje() {
-    this.zapiszSzpule();
+  public zapiszWszystkieEkstensje() {
+    this.zapiszEkstensje(Ekstensje.SZPULE, Szpula.ekstensja.values());
+    this.zapiszEkstensje(Ekstensje.LOGINY, Login.ekstensja.values());
   }
 
-  public wczytajEkstensje() {
+  public wczytajWszystkieEkstensje() {
     this.wczytajSzpule();
+    this.wczytajLoginy();
+  }
+
+  private zapiszEkstensje(ekstensja: Ekstensje, iterable: IterableIterator<any>): void {
+    const instancje = Array.from(iterable);
+    const instancjeParsed = JSON.stringify(instanceToPlain(instancje));
+    this.saveToFile(ekstensja,instancjeParsed);
+  }
+
+  /*  LOGIN  */
+  private wczytajLoginy() {
+    Login.ekstensja = new Map<string, Login>();
+    const plain = this.loadFromFile(Ekstensje.LOGINY);
+    if (typeof plain === "string") {
+      const parsed = JSON.parse(plain);
+      const arrayOfInstances = plainToInstance(Login, parsed);
+      arrayOfInstances
+        .forEach(instance => {
+          Login.dodajDoEkstensji = instance;
+        });
+    } else {
+      throw new Error("Brak loginów do wczytania");
+    }
   }
 
   /*  SZPULA  */
-  private zapiszSzpule() {
-    const instancje = Array.from(Szpula.ekstensja.values());
-    const instancjeParsed = JSON.stringify(instanceToPlain(instancje));
-    this.saveToFile(Ekstensje.SZPULE,instancjeParsed);
-  }
-
   private wczytajSzpule() {
-    Szpula.ekstensja = new Map<string, Szpula>();
+    Szpula.ekstensja.clear();
     const plain = this.loadFromFile(Ekstensje.SZPULE);
     if (typeof plain === "string") {
       const parsed = JSON.parse(plain);
       const arrayOfInstances = plainToInstance(Szpula, parsed);
       arrayOfInstances
         .forEach(instance => {
-          Szpula.dodajDoEkstensji(instance);
+          Szpula.dodajDoEkstensji = instance;
         });
     } else {
-      throw new Error("NOT WORKING");
+      throw new Error("Brak szpul do wczytania");
     }
   }
 
