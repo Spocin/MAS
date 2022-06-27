@@ -5,29 +5,25 @@ export default class Login {
   public static ekstensja: Map<string,Login> = new Map<string, Login>();
 
   @Expose()
-  private readonly _uuid: string;
+  private readonly _Login: string;
 
   @Expose()
-  private _Login: string;
-
-  @Expose()
-  private _Haslo: string;
+  private readonly _Haslo: string;
 
   constructor(login: string, haslo: string) {
-    this._uuid = uuid();
     this._Login = login;
     this._Haslo = haslo;
   }
 
   static set dodajDoEkstensji(login: Login) {
-    this.ekstensja.set(login.uuid, login);
-  }
-
-  get uuid(): string {
-    return this._uuid;
+    this.ekstensja.set(login.Login, login);
   }
 
   get Login(): string {
     return this._Login;
+  }
+
+  get Haslo(): string {
+    return this._Haslo;
   }
 }

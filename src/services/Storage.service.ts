@@ -13,7 +13,7 @@ export enum Ekstensje {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "any"
 })
 export class StorageService {
   storage!: ElectronStore;
