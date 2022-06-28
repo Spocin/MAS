@@ -17,25 +17,30 @@ export enum Ekstensje {
   providedIn: "any"
 })
 export class StorageService {
-  storage!: ElectronStore;
-  _storePath!: string;
+  private storage!: ElectronStore;
+  private readonly _storePath!: string;
+
+  private readonly _isValid: boolean;
 
   constructor() {
     if (isElectron()) {
+      this._isValid = true;
       const ElectronStorage = window.require('electron-store');
       this.storage = new ElectronStorage();
       this._storePath = this.storage.path;
     } else {
-      throw new Error("NOT ELECTRON");
+      this._isValid = false;
     }
   }
 
   public zapiszWszystkieEkstensje() {
+    if (!this.isValid) throw new Error("Service is not valid");
     this.zapiszEkstensje(Ekstensje.SZPULE, Szpula.ekstensja.values());
     this.zapiszEkstensje(Ekstensje.LOGINY, Login.ekstensja.values());
   }
 
   public wczytajWszystkieEkstensje() {
+    if (!this.isValid) throw new Error("Service is not valid");
     this.wczytajSzpule();
     this.wczytajLoginy();
   }
@@ -86,11 +91,11 @@ export class StorageService {
     return this.storage.get(key);
   }
 
-  get isElectron(): boolean {
-    return !!(window && window.process && window.process.type);
-  }
-
   get storePath(): string {
     return this._storePath;
+  }
+
+  get isValid(): boolean {
+    return this._isValid;
   }
 }

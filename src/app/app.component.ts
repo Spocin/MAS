@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {StorageService} from "../services/Storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -19,23 +19,31 @@ export class AppComponent implements OnInit{
     _activeRoute: ActivatedRoute,
     _router: Router
   ) {
-    //TODO try catch as this service is only when working in electron
     this._storageService = _storageService;
-
     this._activeRoute = _activeRoute;
     this._router = _router;
   }
 
   ngOnInit() {
-    this._storageService.wczytajWszystkieEkstensje();
+    try {
+      this._storageService.wczytajWszystkieEkstensje();
+    } catch (e) {
+      if (isDevMode()) {
+        console.error(e);
+      }
+    }
     this._router.navigateByUrl("/login");
   }
 
   save() {
-    this._storageService.zapiszWszystkieEkstensje();
+    if (this._storageService) {
+      this._storageService.zapiszWszystkieEkstensje();
+    }
   }
 
   load() {
-    this._storageService.wczytajWszystkieEkstensje();
+    if (this._storageService) {
+      this._storageService.wczytajWszystkieEkstensje();
+    }
   }
 }

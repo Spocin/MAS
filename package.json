@@ -6,6 +6,7 @@
   "description": "Semestral project made for subject MAS on 6th semester",
   "scripts": {
     "ng": "ng",
+    "ng serve": "ng serve --open",
     "startDev": "ng build --base-href ./ && electron .",
     "startPackaged": "electron-forge start",
     "build": "ng build",
