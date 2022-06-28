@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from "../services/Storage.service";
-import Szpula from "@classes/Szpula";
-import Login from "@classes/Login";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -21,7 +19,9 @@ export class AppComponent implements OnInit{
     _activeRoute: ActivatedRoute,
     _router: Router
   ) {
+    //TODO try catch as this service is only when working in electron
     this._storageService = _storageService;
+
     this._activeRoute = _activeRoute;
     this._router = _router;
   }

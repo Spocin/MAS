@@ -5,6 +5,7 @@ import {Injectable} from "@angular/core";
 import Szpula from "@classes/Szpula";
 import {instanceToPlain, plainToInstance} from "class-transformer";
 import Login from "@classes/Login";
+const isElectron = require('is-electron');
 
 export enum Ekstensje {
   "SZPULE" = "SZPULE",
@@ -20,7 +21,7 @@ export class StorageService {
   _storePath!: string;
 
   constructor() {
-    if (this.isElectron) {
+    if (isElectron()) {
       const ElectronStorage = window.require('electron-store');
       this.storage = new ElectronStorage();
       this._storePath = this.storage.path;
