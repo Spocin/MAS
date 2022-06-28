@@ -1,17 +1,48 @@
+.container {
+  display: flex;
+  height: 100vh;
+
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
 mat-card {
-  max-width: 600px;
-  max-height: 600px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
 
   min-width: 200px;
   min-height: 200px;
 
-  padding: 3rem;
-  text-align: center;
+  width: 100%;
 
-  font-weight: bold;
-  font-size: large;
+  aspect-ratio: 1 / 1;
+
+  max-height: 400px;
+  max-width: 400px;
+
+  margin: 2rem;
 }
 
-mat-form-field {
-  display: block;
+mat-card-content {
+  width: 80%;
+  height: 80%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  row-gap: 1rem;
+
+  text-align: center;
+  justify-content: space-around;
+}
+
+form h2 {
+  font-size: xxx-large;
 }

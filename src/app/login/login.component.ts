@@ -24,10 +24,6 @@ export class LoginComponent implements OnDestroy {
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/main';
   }
 
-  ngOnInit(): void {
-
-  }
-
   ngOnDestroy(): void {
     this._destroySub$.next();
   }
@@ -35,6 +31,7 @@ export class LoginComponent implements OnDestroy {
   onSubmit(): void {
     this.loginValid = this.auth();
     if (this.loginValid) {
+      console.log("SHOULD WORK!");
       this._router.navigateByUrl('/main');
     }
   }
@@ -50,7 +47,8 @@ export class LoginComponent implements OnDestroy {
         return false;
       }
     }
-    return false;
+    //TODO PROD delete these
+    return this.login === "admin" && this.haslo === "admin";
   }
 
 }

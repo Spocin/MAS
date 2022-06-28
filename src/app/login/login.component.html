@@ -1,23 +1,25 @@
-<mat-card>
-  <mat-card-content>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-      <h2>Logowanie</h2>
-      <mat-error *ngIf="!loginValid">
-        Username or password not recognized
-      </mat-error>
-      <mat-form-field>
-        <input matInput placeholder="Login" [(ngModel)]="login" name="login" required>
-        <mat-error>
-          Podaj login
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <h2>Logowanie</h2>
+        <mat-error *ngIf="!loginValid">
+          Username or password not recognized
         </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Haslo" [(ngModel)]="haslo" name="haslo" required>
-        <mat-error>
-          Podaj haslo
-        </mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Zaloguj</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+        <mat-form-field>
+          <input matInput placeholder="Login" [(ngModel)]="login" name="login" required>
+          <mat-error>
+            Podaj login
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Haslo" [(ngModel)]="haslo" name="haslo" required>
+          <mat-error>
+            Podaj haslo
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Zaloguj</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
